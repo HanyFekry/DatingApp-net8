@@ -1,0 +1,8 @@
+services:
+  redis:
+    image: 'redis:7.4.1-alpine'
+  datingapi:
+    image: ${DOCKER_REGISTRY-}datingapi
+    build:
+      context: .
+      dockerfile: DatingApi/Dockerfile

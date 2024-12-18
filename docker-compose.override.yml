@@ -1,0 +1,26 @@
+services:
+  redis:
+    image: 'redis:7.4.1-alpine'
+    container_name: redis
+    restart: always
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    ports:
+      - '6378:6379'
+  datingapi:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - ASPNETCORE_HTTPS_PORTS=8081
+      - ConnectionStrings__DefaultConnection= data source=/app/DatingDb.db
+      - Redis=redis:6379
+
+    ports:
+      - "6001:8080"
+      - "6061:8081"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
+      - ${APPDATA}/DatingDb.db:/app
+    depends_on:
+      - redis

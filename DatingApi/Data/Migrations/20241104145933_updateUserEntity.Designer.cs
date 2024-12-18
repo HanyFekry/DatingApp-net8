@@ -3,6 +3,7 @@ using System;
 using DatingApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DatingApi.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241104145933_updateUserEntity")]
+    partial class updateUserEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.10");
@@ -22,9 +25,6 @@ namespace DatingApi.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
-
-                    b.Property<string>("ArName")
-                        .HasColumnType("TEXT");
 
                     b.Property<string>("City")
                         .HasColumnType("TEXT");
@@ -36,9 +36,6 @@ namespace DatingApi.Data.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<DateOnly>("DateOfBirth")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("EnName")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Gender")
